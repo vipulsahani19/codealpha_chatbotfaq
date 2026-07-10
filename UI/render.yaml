@@ -1,1 +1,14 @@
-
+services:
+  - type: web
+    name: circuitbot-backend
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: ALLOWED_ORIGIN
+        value: "*"
+        # After deploying the frontend to Vercel, change this to your exact
+        # Vercel URL (e.g. https://circuitbot.vercel.app) and redeploy, so
+        # the API only accepts requests from your site.
