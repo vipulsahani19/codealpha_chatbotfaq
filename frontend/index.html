@@ -1,1 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CircuitBot — B.Tech AI & Programming FAQ Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
+<div class="trace-bg" aria-hidden="true"></div>
+
+<div class="app">
+
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">&lt;/&gt;</div>
+      <div class="brand-text">
+        <span class="brand-name">CircuitBot</span>
+        <span class="brand-tag">B.Tech AI FAQ Assistant</span>
+      </div>
+    </div>
+
+    <div class="status-badge offline" id="statusBadge">
+      <span class="status-dot"></span>
+      <span id="statusText">checking backend…</span>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat">
+        <span class="stat-value" id="statAsked">0</span>
+        <span class="stat-label">asked</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="statFaqs">—</span>
+        <span class="stat-label">faqs</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="statAvg">—</span>
+        <span class="stat-label">avg match</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="statMemory">0/3</span>
+        <span class="stat-label">memory</span>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <span class="section-label">// topics</span>
+      <div class="topics" id="topicList"></div>
+    </div>
+
+    <div class="sidebar-section engine-note">
+      <span class="section-label">// stack</span>
+      <p>FastAPI + SQLite backend. Matching uses scikit-learn TF-IDF vectorization (unigrams + bigrams) and cosine similarity to score questions against the FAQ set — a real, explainable ML technique, not hardcoded keyword rules.</p>
+    </div>
+  </aside>
+
+  <!-- ===== Main chat panel ===== -->
+  <main class="chat-panel">
+    <header class="chat-header">
+      <div>
+        <h1>Ask anything about B.Tech, AI &amp; programming</h1>
+        <p class="subhead">87 curated FAQs, answered by a real embedding model running on the backend.</p>
+      </div>
+    </header>
+
+    <div class="messages" id="messages"></div>
+
+    <form class="composer" id="composerForm">
+      <input
+        type="text"
+        id="userInput"
+        placeholder="e.g. What is the difference between AI, ML and Deep Learning?"
+        autocomplete="off"
+      />
+      <button type="submit" id="sendBtn">Ask <span class="send-arrow">→</span></button>
+    </form>
+  </main>
+</div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
